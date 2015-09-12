@@ -1,0 +1,222 @@
+{% extends "base_client.html" %}
+
+{% block operator_fio %}{{ operator_fio }}{% endblock %}
+
+{% block content %}
+
+<div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-edit"></i> {{ name_form }} {% if message %} /  {{ message }} {% endif %}</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<form class="form-horizontal" method="post" action="{{ action }}">{% csrf_token %}
+							<fieldset>
+
+
+                            {% for field in form_field_list %}
+
+                                {% if field.3 == "input" %}
+
+							  <div class="control-group warning">
+								<label class="control-label" for="inputWarning">{{ field.1 }}</label>
+								<div class="controls">
+								  <input value="{{ field.4 }}" name="{{ field.0 }}" type="text" id="inputWarning" >
+								  <span class="help-inline">{{ field.2 }}</span>
+								</div>
+							  </div>
+                                {% endif %}
+
+
+                                {% if field.3 == "select" %}
+
+							  <div class="control-group">
+								<label class="control-label" for="selectError3">{{ field.1 }}</label>
+								<div class="controls">
+								  <select id="selectError3" name="{{ field.0 }}">
+
+                                      {% for option in field.2 %}
+                                                <option value="{{ option.id }}">{{ option }}</option>
+                                      {% endfor %}
+
+								  </select>
+								</div>
+							  </div>
+
+                                {% endif %}
+
+
+                                {% if field.3 == "select_ip" %}
+
+							  <div class="control-group">
+								<label class="control-label" for="selectError3">{{ field.1 }}</label>
+								<div class="controls">
+								  <select id="selectError3" name="{{ field.0 }}">
+
+                                      {% for option in field.2 %}
+                                                <option value="{{ option }}">{{ option }}</option>
+                                      {% endfor %}
+
+								  </select>
+								</div>
+							  </div>
+
+                                {% endif %}
+
+                                {% if field.3 == "multi_select" %}
+
+
+							  <div class="control-group">
+								<label class="control-label" for="selectError1">Multiple Select / Tags</label>
+								<div class="controls">
+        						  <select id="selectError1" multiple data-rel="chosen">
+									<option>Сидоров Сергей</option>
+								  </select>
+								</div>
+							  </div>
+
+                                {% endif %}
+
+                                {% if field.3 == "checkbox" %}
+                                    <div class="control-group">
+								<label class="control-label" for="optionsCheckbox2"> {{ field.1 }}</label>
+								<div class="controls">
+								  <label class="checkbox">
+									<input name="{{ field.0 }}" type="checkbox" id="optionsCheckbox2" value="yes" >
+									{{ field.2 }}
+								  </label>
+								</div>
+							  </div>
+                                {% endif %}
+
+
+
+                                {% if field.3 == "date" %}
+                                <div class="control-group">
+							  <label class="control-label" for="date01">{{ field.1 }}</label>
+							  <div class="controls">
+								<input name="select_date" type="text" class="input-xlarge datepicker" id="date01" value="">
+							  </div>
+							</div>
+                                {% endif %}
+
+                            {% endfor %}
+
+
+
+
+							</fieldset>
+						  </form>
+
+
+
+
+					
+					</div>
+
+
+
+				</div><!--/span-->
+
+
+
+			
+			</div><!--/row-->
+
+
+
+    <!-- Отчеты о пополнениях -->
+
+
+    <div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-user"></i> Пополнения по карточкам </h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content ">
+						<table class="table table-striped table-bordered bootstrap-datatable datatable">
+						  <thead>
+							  <tr>
+								  <th>Секрентный код</th>
+                                  <th>Сумма пополнения</th>
+								  <th>Дата пополнения</th>
+							  </tr>
+						  </thead>
+						  <tbody>
+
+
+
+                        {% for used_card in used_cards %}
+							<tr>
+								<td>{{ used_card.secret_code }}</td>
+								<td class="center">{{ used_card.par_card }}</td>
+                                <td class="center">{{ used_card.used_date }}</td>
+
+							</tr>
+                        {% endfor %}
+
+
+
+
+						  </tbody>
+					  </table>
+					</div>
+				</div><!--/span-->
+
+			</div><!--/row-->
+
+
+    <div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-user"></i> Пополнения через кассу </h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content ">
+						<table class="table table-striped table-bordered bootstrap-datatable datatable">
+						  <thead>
+							  <tr>
+                                  <th>Оператор</th>
+                                  <th>Сумма пополнения</th>
+								  <th>Дата пополнения</th>
+							  </tr>
+						  </thead>
+						  <tbody>
+
+
+
+                        {% for pay in pay_report %}
+							<tr>
+                                <td >{{ pay.id_admin_select }}</td>
+								<td class="center">{{ pay.sum }}</td>
+                                <td class="center">{{ pay.date_of_refill }}</td>
+
+							</tr>
+                        {% endfor %}
+
+
+
+
+						  </tbody>
+					  </table>
+					</div>
+				</div><!--/span-->
+
+			</div><!--/row-->
+
+
+{% endblock %}

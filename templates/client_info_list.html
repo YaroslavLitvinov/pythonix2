@@ -1,0 +1,88 @@
+{% extends "base_admin.html" %}
+
+
+
+{% block operator_fio %}{{ operator_fio }}{% endblock %}
+
+{% block content %}
+
+    {% for data in data_list %}
+
+    <div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-user"></i>  {{ data.0.name }}</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content ">
+						<table class="table table-striped table-bordered bootstrap-datatable datatable">
+						  <thead>
+							  <tr>
+								  <th>Логин</th>
+								  <th>Пароль</th>
+
+								  <th>ip адрес</th>
+                                  <th>Улица</th>
+                                  <th>Номер дома</th>
+								  <th>Действия</th>
+							  </tr>
+						  </thead>
+						  <tbody>
+
+
+
+                        {% for client in data %}
+							<tr>
+								<td>{{ client.login }}</td>
+								<td class="center">{{ client.password }}</td>
+                                <td class="center">{{ client.ip_address }}</td>
+                                <td class="center">{{ client.select_street }}</td>
+                                <td class="center">{{ client.home_address }}</td>
+
+
+
+
+
+								<td class="center">
+									<a class="btn btn-success" href="/info_client/{{ client.id }}/">
+										<i class="icon-zoom-in icon-white"></i>
+										Инфо
+									</a>
+
+
+								        <a class="btn btn-info" href="/recharge/{{ client.id }}/">
+										<i class="icon-edit icon-white"></i>
+										Пополнить
+									    </a>
+
+
+
+									<a class="btn btn-danger" href="/del_client/{{ client.id }}/">
+										<i class="icon-trash icon-white"></i>
+										Удалить
+									</a>
+
+								</td>
+							</tr>
+                        {% endfor %}
+
+
+
+
+						  </tbody>
+					  </table>
+					</div>
+				</div><!--/span-->
+
+			</div><!--/row-->
+
+
+    {% endfor %}
+
+
+
+{% endblock %}

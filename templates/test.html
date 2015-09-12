@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TEST</title>
+</head>
+<body>
+    {% for i in links %}
+        {% autoescape off %}
+            {{ i }}
+        {% endautoescape %}
+
+    {% endfor %}
+
+
+</body>
+</html>

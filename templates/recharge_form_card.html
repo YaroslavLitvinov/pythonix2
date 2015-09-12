@@ -1,0 +1,128 @@
+{% extends "base_client.html" %}
+
+{% block operator_fio %}{{ operator_fio }}{% endblock %}
+
+{% block content %}
+
+<div class="row-fluid sortable">
+				<div class="box span12">
+					<div class="box-header well" data-original-title>
+						<h2><i class="icon-edit"></i> {{ name_form }} {% if message %} /  {{ message }} {% endif %}</h2>
+						<div class="box-icon">
+							<a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+							<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+							<a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+						</div>
+					</div>
+					<div class="box-content">
+						<form class="form-horizontal" method="post" action="{{ action }}">{% csrf_token %}
+							<fieldset>
+
+
+                            {% for field in form_field_list %}
+
+                                {% if field.3 == "input" %}
+
+							  <div class="control-group warning">
+								<label class="control-label" for="inputWarning">{{ field.1 }}</label>
+								<div class="controls">
+								  <input value="{{ field.4 }}" name="{{ field.0 }}" type="text" id="inputWarning" >
+								  <span class="help-inline">{{ field.2 }}</span>
+								</div>
+							  </div>
+                                {% endif %}
+
+
+                                {% if field.3 == "select" %}
+
+							  <div class="control-group">
+								<label class="control-label" for="selectError3">{{ field.1 }}</label>
+								<div class="controls">
+								  <select id="selectError3" name="{{ field.0 }}">
+
+                                      {% for option in field.2 %}
+                                                <option value="{{ option.id }}">{{ option }}</option>
+                                      {% endfor %}
+
+								  </select>
+								</div>
+							  </div>
+
+                                {% endif %}
+
+
+                                {% if field.3 == "select_ip" %}
+
+							  <div class="control-group">
+								<label class="control-label" for="selectError3">{{ field.1 }}</label>
+								<div class="controls">
+								  <select id="selectError3" name="{{ field.0 }}">
+
+                                      {% for option in field.2 %}
+                                                <option value="{{ option }}">{{ option }}</option>
+                                      {% endfor %}
+
+								  </select>
+								</div>
+							  </div>
+
+                                {% endif %}
+
+                                {% if field.3 == "multi_select" %}
+
+
+							  <div class="control-group">
+								<label class="control-label" for="selectError1">Multiple Select / Tags</label>
+								<div class="controls">
+								  <select id="selectError1" multiple data-rel="chosen">
+									<option>Лыков Константин</option>
+									<option>Тарасов Алексей</option>
+									<option>Цыбин Олег</option>
+									<option>Иванов Иван</option>
+									<option>Сидоров Сергей</option>
+								  </select>
+								</div>
+							  </div>
+
+                                {% endif %}
+
+                                {% if field.3 == "checkbox" %}
+                                    <div class="control-group">
+								<label class="control-label" for="optionsCheckbox2"> {{ field.1 }}</label>
+								<div class="controls">
+								  <label class="checkbox">
+									<input name="{{ field.0 }}" type="checkbox" id="optionsCheckbox2" value="yes" >
+									{{ field.2 }}
+								  </label>
+								</div>
+							  </div>
+                                {% endif %}
+
+
+
+                                {% if field.3 == "date" %}
+                                <div class="control-group">
+							  <label class="control-label" for="date01">{{ field.1 }}</label>
+							  <div class="controls">
+								<input name="select_date" type="text" class="input-xlarge datepicker" id="date01" value="">
+							  </div>
+							</div>
+                                {% endif %}
+
+                            {% endfor %}
+
+
+
+							  <div class="form-actions">
+								<button type="submit" class="btn btn-primary">Выполнить</button>
+								<!-- <button class="btn">Отменить</button> -->
+							  </div>
+							</fieldset>
+						  </form>
+					
+					</div>
+				</div><!--/span-->
+			
+			</div><!--/row-->
+
+{% endblock %}
