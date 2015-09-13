@@ -1,0 +1,739 @@
+-- MySQL dump 10.13  Distrib 5.5.31, for debian-linux-gnu (i686)
+--
+-- Host: localhost    Database: pythonix2
+-- ------------------------------------------------------
+-- Server version	5.5.31-0+wheezy1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Current Database: `pythonix2`
+--
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `pythonix2` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `pythonix2`;
+
+--
+-- Table structure for table `auth_group`
+--
+
+DROP TABLE IF EXISTS `auth_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(80) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group`
+--
+
+LOCK TABLES `auth_group` WRITE;
+/*!40000 ALTER TABLE `auth_group` DISABLE KEYS */;
+INSERT INTO `auth_group` VALUES (1,'super user rights');
+/*!40000 ALTER TABLE `auth_group` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_group_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_group_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `group_id` (`group_id`,`permission_id`),
+  KEY `auth_group_permissions_425ae3c4` (`group_id`),
+  KEY `auth_group_permissions_1e014c8f` (`permission_id`),
+  CONSTRAINT `group_id_refs_id_3cea63fe` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
+  CONSTRAINT `permission_id_refs_id_5886d21f` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_group_permissions`
+--
+
+LOCK TABLES `auth_group_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_group_permissions` DISABLE KEYS */;
+INSERT INTO `auth_group_permissions` VALUES (1,1,1),(2,1,2),(3,1,3),(4,1,4),(5,1,5),(6,1,6),(7,1,7),(8,1,8),(9,1,9),(10,1,10),(11,1,11),(12,1,12),(13,1,13),(14,1,14),(15,1,15),(16,1,16),(17,1,17),(18,1,18),(19,1,19),(20,1,20),(21,1,21),(22,1,22),(23,1,23),(24,1,24),(25,1,25),(26,1,26),(27,1,27),(28,1,28),(29,1,29),(30,1,30),(31,1,31),(32,1,32),(33,1,33),(34,1,34),(35,1,35),(36,1,36),(37,1,37),(38,1,38),(39,1,39),(40,1,40),(41,1,41),(42,1,42),(43,1,43),(44,1,44),(45,1,45),(46,1,46),(47,1,47),(48,1,48),(49,1,49),(50,1,50),(51,1,51),(52,1,52),(53,1,53),(54,1,54),(55,1,55),(56,1,56),(57,1,57),(58,1,58),(59,1,59),(60,1,60),(61,1,61),(62,1,62),(63,1,63);
+/*!40000 ALTER TABLE `auth_group_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_permission`
+--
+
+DROP TABLE IF EXISTS `auth_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_permission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `content_type_id` int(11) NOT NULL,
+  `codename` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `content_type_id` (`content_type_id`,`codename`),
+  KEY `auth_permission_1bb8f392` (`content_type_id`),
+  CONSTRAINT `content_type_id_refs_id_728de91f` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_permission`
+--
+
+LOCK TABLES `auth_permission` WRITE;
+/*!40000 ALTER TABLE `auth_permission` DISABLE KEYS */;
+INSERT INTO `auth_permission` VALUES (1,'Can add permission',1,'add_permission'),(2,'Can change permission',1,'change_permission'),(3,'Can delete permission',1,'delete_permission'),(4,'Can add group',2,'add_group'),(5,'Can change group',2,'change_group'),(6,'Can delete group',2,'delete_group'),(7,'Can add user',3,'add_user'),(8,'Can change user',3,'change_user'),(9,'Can delete user',3,'delete_user'),(10,'Can add content type',4,'add_contenttype'),(11,'Can change content type',4,'change_contenttype'),(12,'Can delete content type',4,'delete_contenttype'),(13,'Can add session',5,'add_session'),(14,'Can change session',5,'change_session'),(15,'Can delete session',5,'delete_session'),(16,'Can add site',6,'add_site'),(17,'Can change site',6,'change_site'),(18,'Can delete site',6,'delete_site'),(19,'Can add log entry',7,'add_logentry'),(20,'Can change log entry',7,'change_logentry'),(21,'Can delete log entry',7,'delete_logentry'),(22,'Can add Администраторы',8,'add_billingadmins'),(23,'Can change Администраторы',8,'change_billingadmins'),(24,'Can delete Администраторы',8,'delete_billingadmins'),(25,'Can add Физические сети',9,'add_physicalnetwork'),(26,'Can change Физические сети',9,'change_physicalnetwork'),(27,'Can delete Физические сети',9,'delete_physicalnetwork'),(28,'Can add Типы устройств',10,'add_devicetype'),(29,'Can change Типы устройств',10,'change_devicetype'),(30,'Can delete Типы устройств',10,'delete_devicetype'),(31,'Can add Устройства',11,'add_devices'),(32,'Can change Устройства',11,'change_devices'),(33,'Can delete Устройства',11,'delete_devices'),(34,'Can add Список подсетей',12,'add_ipnetworks'),(35,'Can change Список подсетей',12,'change_ipnetworks'),(36,'Can delete Список подсетей',12,'delete_ipnetworks'),(37,'Can add Группы клиентов',13,'add_clientsgroups'),(38,'Can change Группы клиентов',13,'change_clientsgroups'),(39,'Can delete Группы клиентов',13,'delete_clientsgroups'),(40,'Can add Тарифы',14,'add_tarifs'),(41,'Can change Тарифы',14,'change_tarifs'),(42,'Can delete Тарифы',14,'delete_tarifs'),(43,'Can add Улицы',15,'add_streets'),(44,'Can change Улицы',15,'change_streets'),(45,'Can delete Улицы',15,'delete_streets'),(46,'Can add Клиенты',16,'add_clients'),(47,'Can change Клиенты',16,'change_clients'),(48,'Can delete Клиенты',16,'delete_clients'),(49,'Can add report',17,'add_report'),(50,'Can change report',17,'change_report'),(51,'Can delete report',17,'delete_report'),(52,'Can add Временные платежи',18,'add_temporarypayment'),(53,'Can change Временные платежи',18,'change_temporarypayment'),(54,'Can delete Временные платежи',18,'delete_temporarypayment'),(55,'Can add card',19,'add_card'),(56,'Can change card',19,'change_card'),(57,'Can delete card',19,'delete_card'),(58,'Can add card report',20,'add_cardreport'),(59,'Can change card report',20,'change_cardreport'),(60,'Can delete card report',20,'delete_cardreport'),(61,'Can add physical network card report',21,'add_physicalnetworkcardreport'),(62,'Can change physical network card report',21,'change_physicalnetworkcardreport'),(63,'Can delete physical network card report',21,'delete_physicalnetworkcardreport');
+/*!40000 ALTER TABLE `auth_permission` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user`
+--
+
+DROP TABLE IF EXISTS `auth_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(30) NOT NULL,
+  `first_name` varchar(30) NOT NULL,
+  `last_name` varchar(30) NOT NULL,
+  `email` varchar(75) NOT NULL,
+  `password` varchar(128) NOT NULL,
+  `is_staff` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `is_superuser` tinyint(1) NOT NULL,
+  `last_login` datetime NOT NULL,
+  `date_joined` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user`
+--
+
+LOCK TABLES `auth_user` WRITE;
+/*!40000 ALTER TABLE `auth_user` DISABLE KEYS */;
+INSERT INTO `auth_user` VALUES (1,'tram','','','p@ya.ru','pbkdf2_sha256$10000$v23zM1PBpN7i$1Xn5lu3iqy5j26Bf6NGothTMYYX+mAWsQYpxN3gTnKM=',1,1,1,'2015-07-18 10:34:03','2013-11-02 11:14:29');
+/*!40000 ALTER TABLE `auth_user` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_groups`
+--
+
+DROP TABLE IF EXISTS `auth_user_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_groups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`,`group_id`),
+  KEY `auth_user_groups_403f60f` (`user_id`),
+  KEY `auth_user_groups_425ae3c4` (`group_id`),
+  CONSTRAINT `group_id_refs_id_f116770` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
+  CONSTRAINT `user_id_refs_id_7ceef80f` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user_groups`
+--
+
+LOCK TABLES `auth_user_groups` WRITE;
+/*!40000 ALTER TABLE `auth_user_groups` DISABLE KEYS */;
+INSERT INTO `auth_user_groups` VALUES (1,1,1);
+/*!40000 ALTER TABLE `auth_user_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `auth_user_user_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_user_user_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_user_permissions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id` (`user_id`,`permission_id`),
+  KEY `auth_user_user_permissions_403f60f` (`user_id`),
+  KEY `auth_user_user_permissions_1e014c8f` (`permission_id`),
+  CONSTRAINT `permission_id_refs_id_67e79cb` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `user_id_refs_id_dfbab7d` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `auth_user_user_permissions`
+--
+
+LOCK TABLES `auth_user_user_permissions` WRITE;
+/*!40000 ALTER TABLE `auth_user_user_permissions` DISABLE KEYS */;
+/*!40000 ALTER TABLE `auth_user_user_permissions` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_admin_log`
+--
+
+DROP TABLE IF EXISTS `django_admin_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_admin_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `action_time` datetime NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `content_type_id` int(11) DEFAULT NULL,
+  `object_id` longtext,
+  `object_repr` varchar(200) NOT NULL,
+  `action_flag` smallint(5) unsigned NOT NULL,
+  `change_message` longtext NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `django_admin_log_403f60f` (`user_id`),
+  KEY `django_admin_log_1bb8f392` (`content_type_id`),
+  CONSTRAINT `content_type_id_refs_id_288599e6` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `user_id_refs_id_c8665aa` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=270 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `django_content_type`
+--
+
+DROP TABLE IF EXISTS `django_content_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_content_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `app_label` varchar(100) NOT NULL,
+  `model` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `app_label` (`app_label`,`model`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_content_type`
+--
+
+LOCK TABLES `django_content_type` WRITE;
+/*!40000 ALTER TABLE `django_content_type` DISABLE KEYS */;
+INSERT INTO `django_content_type` VALUES (1,'permission','auth','permission'),(2,'group','auth','group'),(3,'user','auth','user'),(4,'content type','contenttypes','contenttype'),(5,'session','sessions','session'),(6,'site','sites','site'),(7,'log entry','admin','logentry'),(8,'Администраторы','pythonix2app','billingadmins'),(9,'Физические сети','pythonix2app','physicalnetwork'),(10,'Типы устройств','pythonix2app','devicetype'),(11,'Устройства','pythonix2app','devices'),(12,'Список подсетей','pythonix2app','ipnetworks'),(13,'Группы клиентов','pythonix2app','clientsgroups'),(14,'Тарифы','pythonix2app','tarifs'),(15,'Улицы','pythonix2app','streets'),(16,'Клиенты','pythonix2app','clients'),(17,'report','pythonix2app','report'),(18,'Временные платежи','pythonix2app','temporarypayment'),(19,'card','pythonix2app','card'),(20,'card report','pythonix2app','cardreport'),(21,'physical network card report','pythonix2app','physicalnetworkcardreport');
+/*!40000 ALTER TABLE `django_content_type` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `django_session`
+--
+
+DROP TABLE IF EXISTS `django_session`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_session` (
+  `session_key` varchar(40) NOT NULL,
+  `session_data` longtext NOT NULL,
+  `expire_date` datetime NOT NULL,
+  PRIMARY KEY (`session_key`),
+  KEY `django_session_3da3d3d8` (`expire_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+--
+-- Table structure for table `django_site`
+--
+
+DROP TABLE IF EXISTS `django_site`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_site` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `domain` varchar(100) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `django_site`
+--
+
+LOCK TABLES `django_site` WRITE;
+/*!40000 ALTER TABLE `django_site` DISABLE KEYS */;
+INSERT INTO `django_site` VALUES (1,'example.com','example.com');
+/*!40000 ALTER TABLE `django_site` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pythonix2app_billingadmins`
+--
+
+DROP TABLE IF EXISTS `pythonix2app_billingadmins`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pythonix2app_billingadmins` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `login` varchar(50) NOT NULL,
+  `passwod` varchar(50) NOT NULL,
+  `fio` varchar(50) NOT NULL,
+  `balance` int(11) NOT NULL,
+  `administration` tinyint(1) NOT NULL,
+  `see_report` tinyint(1) NOT NULL,
+  `gen_card` tinyint(1) NOT NULL,
+  `transfer_money` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pythonix2app_billingadmins`
+--
+
+LOCK TABLES `pythonix2app_billingadmins` WRITE;
+/*!40000 ALTER TABLE `pythonix2app_billingadmins` DISABLE KEYS */;
+INSERT INTO `pythonix2app_billingadmins` VALUES (2,'kzd','Cheez777Man1','KZD',10710,1,1,1,1);
+/*!40000 ALTER TABLE `pythonix2app_billingadmins` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pythonix2app_card`
+--
+
+DROP TABLE IF EXISTS `pythonix2app_card`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pythonix2app_card` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `secret_code` varchar(50) NOT NULL,
+  `series` varchar(50) NOT NULL,
+  `par_card` int(11) NOT NULL,
+  `create_date` date NOT NULL,
+  `used_date` date NOT NULL,
+  `used` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+--
+-- Table structure for table `pythonix2app_cardreport`
+--
+
+DROP TABLE IF EXISTS `pythonix2app_cardreport`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pythonix2app_cardreport` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `client_used_card` varchar(100) NOT NULL,
+  `physicalnetwork_id` int(11) NOT NULL,
+  `series_card` varchar(100) NOT NULL,
+  `secret_code` varchar(50) NOT NULL,
+  `par_card` varchar(100) NOT NULL,
+  `used_date` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pythonix2app_cardreport_7effb1a4` (`physicalnetwork_id`),
+  CONSTRAINT `physicalnetwork_id_refs_id_d07984bb` FOREIGN KEY (`physicalnetwork_id`) REFERENCES `pythonix2app_physicalnetwork` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+--
+-- Table structure for table `pythonix2app_clients`
+--
+
+DROP TABLE IF EXISTS `pythonix2app_clients`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pythonix2app_clients` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `fio` varchar(150) NOT NULL,
+  `login` varchar(50) NOT NULL,
+  `password` varchar(50) NOT NULL,
+  `ip_address` char(15) NOT NULL,
+  `send_sms` tinyint(1) NOT NULL,
+  `select_tarif_id` int(11) NOT NULL,
+  `select_clients_group_id` int(11) NOT NULL,
+  `create_date` date NOT NULL,
+  `end_used_date` date NOT NULL,
+  `select_street_id` int(11) NOT NULL,
+  `mobile_phone` varchar(50) DEFAULT NULL,
+  `home_address` varchar(50) DEFAULT NULL,
+  `network_traffic_per_day` int(11) DEFAULT NULL,
+  `network_traffic_for_the_month` int(11) DEFAULT NULL,
+  `balance` int(11) NOT NULL,
+  `internet_status` tinyint(1) NOT NULL,
+  `error_card` int(11) DEFAULT NULL,
+  `mac` varchar(17) DEFAULT NULL,
+  `ip_local` char(15) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pythonix2app_clients_382c52cf` (`select_tarif_id`),
+  KEY `pythonix2app_clients_3b543a87` (`select_clients_group_id`),
+  KEY `pythonix2app_clients_56fc413f` (`select_street_id`),
+  CONSTRAINT `select_clients_group_id_refs_id_1430b16f` FOREIGN KEY (`select_clients_group_id`) REFERENCES `pythonix2app_clientsgroups` (`id`),
+  CONSTRAINT `select_street_id_refs_id_305e4c5b` FOREIGN KEY (`select_street_id`) REFERENCES `pythonix2app_streets` (`id`),
+  CONSTRAINT `select_tarif_id_refs_id_554f0df7` FOREIGN KEY (`select_tarif_id`) REFERENCES `pythonix2app_tarifs` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=65 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+--
+-- Table structure for table `pythonix2app_clientsgroups`
+--
+
+DROP TABLE IF EXISTS `pythonix2app_clientsgroups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pythonix2app_clientsgroups` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) NOT NULL,
+  `select_device_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pythonix2app_clientsgroups_7e18868c` (`select_device_id`),
+  CONSTRAINT `select_device_id_refs_id_2702b7c0` FOREIGN KEY (`select_device_id`) REFERENCES `pythonix2app_devices` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `pythonix2app_clientsgroups_networks_list`
+--
+
+DROP TABLE IF EXISTS `pythonix2app_clientsgroups_networks_list`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pythonix2app_clientsgroups_networks_list` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `clientsgroups_id` int(11) NOT NULL,
+  `ipnetworks_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `clientsgroups_id` (`clientsgroups_id`,`ipnetworks_id`),
+  KEY `pythonix2app_clientsgroups_networks_list_7cb53831` (`clientsgroups_id`),
+  KEY `pythonix2app_clientsgroups_networks_list_6eea5740` (`ipnetworks_id`),
+  CONSTRAINT `clientsgroups_id_refs_id_229d5bbe` FOREIGN KEY (`clientsgroups_id`) REFERENCES `pythonix2app_clientsgroups` (`id`),
+  CONSTRAINT `ipnetworks_id_refs_id_58915be7` FOREIGN KEY (`ipnetworks_id`) REFERENCES `pythonix2app_ipnetworks` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pythonix2app_clientsgroups_networks_list`
+--
+
+LOCK TABLES `pythonix2app_clientsgroups_networks_list` WRITE;
+/*!40000 ALTER TABLE `pythonix2app_clientsgroups_networks_list` DISABLE KEYS */;
+INSERT INTO `pythonix2app_clientsgroups_networks_list` VALUES (12,2,6),(15,3,9),(14,4,8);
+/*!40000 ALTER TABLE `pythonix2app_clientsgroups_networks_list` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pythonix2app_clientsgroups_select_admin`
+--
+
+DROP TABLE IF EXISTS `pythonix2app_clientsgroups_select_admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pythonix2app_clientsgroups_select_admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `clientsgroups_id` int(11) NOT NULL,
+  `billingadmins_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `clientsgroups_id` (`clientsgroups_id`,`billingadmins_id`),
+  KEY `pythonix2app_clientsgroups_select_admin_7cb53831` (`clientsgroups_id`),
+  KEY `pythonix2app_clientsgroups_select_admin_cd17f24` (`billingadmins_id`),
+  CONSTRAINT `billingadmins_id_refs_id_425b8f92` FOREIGN KEY (`billingadmins_id`) REFERENCES `pythonix2app_billingadmins` (`id`),
+  CONSTRAINT `clientsgroups_id_refs_id_3ff0391` FOREIGN KEY (`clientsgroups_id`) REFERENCES `pythonix2app_clientsgroups` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pythonix2app_clientsgroups_select_admin`
+--
+
+LOCK TABLES `pythonix2app_clientsgroups_select_admin` WRITE;
+/*!40000 ALTER TABLE `pythonix2app_clientsgroups_select_admin` DISABLE KEYS */;
+INSERT INTO `pythonix2app_clientsgroups_select_admin` VALUES (12,2,2),(15,3,2),(14,4,2);
+/*!40000 ALTER TABLE `pythonix2app_clientsgroups_select_admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pythonix2app_devices`
+--
+
+DROP TABLE IF EXISTS `pythonix2app_devices`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pythonix2app_devices` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
+  `physicalnetwork_id` int(11) NOT NULL,
+  `devicetype_id` int(11) NOT NULL,
+  `network_address` char(15) NOT NULL,
+  `login` varchar(50) NOT NULL,
+  `passwod` varchar(50) NOT NULL,
+  `api_port` int(11) NOT NULL,
+  `master` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pythonix2app_devices_7effb1a4` (`physicalnetwork_id`),
+  KEY `pythonix2app_devices_30379dc` (`devicetype_id`),
+  CONSTRAINT `devicetype_id_refs_id_5f68e94f` FOREIGN KEY (`devicetype_id`) REFERENCES `pythonix2app_devicetype` (`id`),
+  CONSTRAINT `physicalnetwork_id_refs_id_5d0867c5` FOREIGN KEY (`physicalnetwork_id`) REFERENCES `pythonix2app_physicalnetwork` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `pythonix2app_devicetype`
+--
+
+DROP TABLE IF EXISTS `pythonix2app_devicetype`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pythonix2app_devicetype` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pythonix2app_devicetype`
+--
+
+LOCK TABLES `pythonix2app_devicetype` WRITE;
+/*!40000 ALTER TABLE `pythonix2app_devicetype` DISABLE KEYS */;
+INSERT INTO `pythonix2app_devicetype` VALUES (1,'mikrotik'),(2,'freebsd');
+/*!40000 ALTER TABLE `pythonix2app_devicetype` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pythonix2app_ipnetworks`
+--
+
+DROP TABLE IF EXISTS `pythonix2app_ipnetworks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pythonix2app_ipnetworks` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ipnetworks` char(15) NOT NULL,
+  `CIDR` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pythonix2app_ipnetworks`
+--
+
+LOCK TABLES `pythonix2app_ipnetworks` WRITE;
+/*!40000 ALTER TABLE `pythonix2app_ipnetworks` DISABLE KEYS */;
+INSERT INTO `pythonix2app_ipnetworks` VALUES (6,'10.10.0.1',24),(8,'10.10.114.1',24),(9,'10.10.84.1',24);
+/*!40000 ALTER TABLE `pythonix2app_ipnetworks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pythonix2app_physicalnetwork`
+--
+
+DROP TABLE IF EXISTS `pythonix2app_physicalnetwork`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pythonix2app_physicalnetwork` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `pythonix2app_physicalnetwork_select_admin`
+--
+
+DROP TABLE IF EXISTS `pythonix2app_physicalnetwork_select_admin`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pythonix2app_physicalnetwork_select_admin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `physicalnetwork_id` int(11) NOT NULL,
+  `billingadmins_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `physicalnetwork_id` (`physicalnetwork_id`,`billingadmins_id`),
+  KEY `pythonix2app_physicalnetwork_select_admin_7effb1a4` (`physicalnetwork_id`),
+  KEY `pythonix2app_physicalnetwork_select_admin_cd17f24` (`billingadmins_id`),
+  CONSTRAINT `billingadmins_id_refs_id_6d6bf317` FOREIGN KEY (`billingadmins_id`) REFERENCES `pythonix2app_billingadmins` (`id`),
+  CONSTRAINT `physicalnetwork_id_refs_id_453af821` FOREIGN KEY (`physicalnetwork_id`) REFERENCES `pythonix2app_physicalnetwork` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pythonix2app_physicalnetwork_select_admin`
+--
+
+LOCK TABLES `pythonix2app_physicalnetwork_select_admin` WRITE;
+/*!40000 ALTER TABLE `pythonix2app_physicalnetwork_select_admin` DISABLE KEYS */;
+INSERT INTO `pythonix2app_physicalnetwork_select_admin` VALUES (15,2,2),(12,3,2),(10,4,2),(13,5,2);
+/*!40000 ALTER TABLE `pythonix2app_physicalnetwork_select_admin` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pythonix2app_physicalnetworkcardreport`
+--
+
+DROP TABLE IF EXISTS `pythonix2app_physicalnetworkcardreport`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pythonix2app_physicalnetworkcardreport` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `physicalnetwork_id` int(11) NOT NULL,
+  `money` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pythonix2app_physicalnetworkcardreport_7effb1a4` (`physicalnetwork_id`),
+  CONSTRAINT `physicalnetwork_id_refs_id_d77ba07d` FOREIGN KEY (`physicalnetwork_id`) REFERENCES `pythonix2app_physicalnetwork` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pythonix2app_physicalnetworkcardreport`
+--
+
+LOCK TABLES `pythonix2app_physicalnetworkcardreport` WRITE;
+/*!40000 ALTER TABLE `pythonix2app_physicalnetworkcardreport` DISABLE KEYS */;
+INSERT INTO `pythonix2app_physicalnetworkcardreport` VALUES (2,2,'400'),(3,5,'180');
+/*!40000 ALTER TABLE `pythonix2app_physicalnetworkcardreport` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pythonix2app_report`
+--
+
+DROP TABLE IF EXISTS `pythonix2app_report`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pythonix2app_report` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_admin_select_id` int(11) NOT NULL,
+  `id_client_select_id` int(11) NOT NULL,
+  `sum` int(11) NOT NULL,
+  `date_of_refill` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pythonix2app_report_c2973c7d` (`id_admin_select_id`),
+  KEY `pythonix2app_report_44bd0866` (`id_client_select_id`),
+  CONSTRAINT `id_admin_select_id_refs_id_fc84fc2f` FOREIGN KEY (`id_admin_select_id`) REFERENCES `pythonix2app_billingadmins` (`id`),
+  CONSTRAINT `id_client_select_id_refs_id_a2755282` FOREIGN KEY (`id_client_select_id`) REFERENCES `pythonix2app_clients` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+--
+-- Table structure for table `pythonix2app_streets`
+--
+
+DROP TABLE IF EXISTS `pythonix2app_streets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pythonix2app_streets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
+  `select_device_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pythonix2app_streets_7e18868c` (`select_device_id`),
+  CONSTRAINT `select_device_id_refs_id_75d3ac42` FOREIGN KEY (`select_device_id`) REFERENCES `pythonix2app_devices` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+--
+-- Table structure for table `pythonix2app_tarifs`
+--
+
+DROP TABLE IF EXISTS `pythonix2app_tarifs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pythonix2app_tarifs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `select_physicalnetwork_id` int(11) NOT NULL,
+  `name` varchar(150) NOT NULL,
+  `speed_up` int(11) NOT NULL,
+  `speed_down` int(11) NOT NULL,
+  `fee` int(11) NOT NULL,
+  `speed_limit` tinyint(1) NOT NULL,
+  `limit_rule` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pythonix2app_tarifs_e2c7364` (`select_physicalnetwork_id`),
+  CONSTRAINT `select_physicalnetwork_id_refs_id_678c0e8e` FOREIGN KEY (`select_physicalnetwork_id`) REFERENCES `pythonix2app_physicalnetwork` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pythonix2app_tarifs`
+--
+
+LOCK TABLES `pythonix2app_tarifs` WRITE;
+/*!40000 ALTER TABLE `pythonix2app_tarifs` DISABLE KEYS */;
+INSERT INTO `pythonix2app_tarifs` VALUES (3,2,'VIP-Тариф3',3,3,200,0,''),(4,2,'Стандарт',1,1,130,1,''),(5,5,'Минимальный',0,0,80,0,''),(6,3,'Минимальный',0,0,80,1,''),(7,3,'Стандарт',1,1,130,1,''),(8,2,'Минимальный',0,0,80,1,''),(9,2,'Максимальный',2,2,150,1,''),(10,5,'Стандарт',1,1,130,0,''),(11,5,'Максимальный',2,2,150,0,''),(12,5,'VIP-Тариф3',3,3,200,0,''),(13,3,'Максимальный',2,2,180,1,'');
+/*!40000 ALTER TABLE `pythonix2app_tarifs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pythonix2app_temporarypayment`
+--
+
+DROP TABLE IF EXISTS `pythonix2app_temporarypayment`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pythonix2app_temporarypayment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `select_client_id` int(11) NOT NULL,
+  `sum` int(11) NOT NULL,
+  `date_of_refill` date NOT NULL,
+  `namber_days` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pythonix2app_temporarypayment_539bd4df` (`select_client_id`),
+  CONSTRAINT `select_client_id_refs_id_706a4b39` FOREIGN KEY (`select_client_id`) REFERENCES `pythonix2app_clients` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pythonix2app_temporarypayment`
+--
+
+LOCK TABLES `pythonix2app_temporarypayment` WRITE;
+/*!40000 ALTER TABLE `pythonix2app_temporarypayment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pythonix2app_temporarypayment` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2015-09-13  4:33:21
